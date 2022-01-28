@@ -1,0 +1,21 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - docker build -t barwieleba/lab_8 -f Dockerfile .
+
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "Wieleba_React"
+  env: "Wielebareact-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-592175577642"
+  bucket_path: "docker-test"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
